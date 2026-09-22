@@ -1,6 +1,6 @@
-type OrderChannel = "chatgpt" | "gemini" | "copilot" | "human";
+export type OrderChannel = "chatgpt" | "gemini" | "copilot" | "human";
 
-interface StoreProduct {
+export interface StoreProduct {
   id: string;
   title: string;
   description: string;
@@ -13,13 +13,13 @@ interface StoreProduct {
   sku: string;
 }
 
-interface StorePolicyUrls {
+export interface StorePolicyUrls {
   privacy: string;
   refund: string;
   shipping: string;
 }
 
-interface StoreCatalog {
+export interface StoreCatalog {
   merchant: string;
   brand: string;
   description: string;
@@ -27,7 +27,7 @@ interface StoreCatalog {
   policies: StorePolicyUrls;
 }
 
-interface StoreOrder {
+export interface StoreOrder {
   id: string;
   createdAt: string;
   channel: OrderChannel;
@@ -41,6 +41,4 @@ interface StoreOrder {
   spt?: string;
 }
 
-const UCP_VERSION = "2026-01-23";
-
-export default UCP_VERSION;
+export const UCP_VERSION = "2026-01-23";

@@ -1,24 +1,9 @@
-import Header from "./Header";
-import ProductGrid from "./ProductGrid";
-import ProductDetail from "./ProductDetail";
+"use client";
+import React, { useState } from "react";
 import Footer from "./Footer";
-import CATALOG from "./lib/catalog";
-import UCP_VERSION from "./lib/commerce-types";
-import CHANNELS from "./lib/channel";
-import DDL from "./lib/orders";
-import Stripe from "./lib/checkout";
-import CORS from "./lib/ucp";
-import OPTIONS from "./app/.well-known/ucp/route";
-import OPTIONS from "./app/ucp/v1/products/route";
-import OPTIONS from "./app/api/checkout/route";
-import OPTIONS from "./app/api/acp/checkout-sessions/route";
-import TOOLS from "./app/mcp/route";
-import AdminOrdersPage from "./app/admin/orders/page";
-import CheckoutSuccessPage from "./app/checkout/success/page";
-import Page from "./app/policies/privacy/page";
-import Page from "./app/policies/refund/page";
-import Page from "./app/policies/shipping/page";
-
+import Header from "./Header";
+import ProductDetail from "./ProductDetail";
+import ProductGrid from "./ProductGrid";
 const PRODUCTS = [
   { "id": "monstera-deliciosa", "sku": "MONSTERA-DEL", "title": "Monstera Deliciosa", "description": "Monstera Deliciosa", "images": [], "price": 3800, "currency": "usd", "inventory": 24, "gtin": "2001378636968", "brand": "Fern and Field" },
   { "id": "stoneware-planter", "sku": "STONEWARE-PL", "title": "Stoneware Planter", "description": "Stoneware Planter", "images": [], "price": 2600, "currency": "usd", "inventory": 24, "gtin": "2000612775114", "brand": "Fern and Field" },
@@ -41,7 +26,7 @@ export default function Component() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const channel = new URLSearchParams(window.location.search).get('channel') || 'human';
+  const channel = (typeof window === "undefined" ? new URLSearchParams() : (typeof window === "undefined" ? new URLSearchParams() : (typeof window === "undefined" ? new URLSearchParams() : new URLSearchParams(window.location.search)))).get('channel') || 'human';
 
   const handleBuy = async (sku: string, quantity: number) => {
     const result = await (window as any).createCheckoutSession?.({ sku, quantity, channel });
@@ -99,7 +84,7 @@ export default function Component() {
         <div className="mx-auto max-w-md px-6 text-center">
           <div className="font-serif text-3xl tracking-tight mb-6">Stay in the garden</div>
           <form onSubmit={handleNewsletter} className="flex">
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Your email" className="flex-1 border-b border-stone-300 bg-transparent py-3 text-sm focus:outline-none" required />
+            <input type="email" value={email} onChange={(e: any) => setEmail(e.target.value)} placeholder="Your email" className="flex-1 border-b border-stone-300 bg-transparent py-3 text-sm focus:outline-none" required />
             <button type="submit" className="px-8 text-xs tracking-[0.18em] uppercase border-b-2 border-current">Subscribe</button>
           </form>
           {submitted && <div className="mt-3 text-xs text-[#8B5E3C]">Thank you. You’re on the list.</div>}

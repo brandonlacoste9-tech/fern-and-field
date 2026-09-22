@@ -1,5 +1,8 @@
+import { getProduct } from "./catalog";
+import { createOrder } from "./orders";
+import type { OrderChannel } from "./commerce-types";
 
-async function createCheckoutSession(input: {
+export async function createCheckoutSession(input: {
   sku: string;
   quantity?: number;
   channel?: OrderChannel;
@@ -63,5 +66,3 @@ async function createCheckoutSession(input: {
     (input.channel || "human");
   return { id: "cs_stub_" + order.id, url, orderId: order.id, stub: true };
 }
-
-export default Stripe;

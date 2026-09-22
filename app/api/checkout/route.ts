@@ -3,18 +3,11 @@ import { createCheckoutSession } from "@/lib/checkout";
 import { detectChannel } from "@/lib/channel";
 import { CORS } from "@/lib/ucp";
 
-
-
-
-
-
-
-
-async export default function OPTIONS() {
+export async function OPTIONS(req: Request) {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-async function POST(req: Request) {
+export async function POST(req: Request) {
   let body: Record<string, unknown> = {};
   try {
     body = (await req.json()) as Record<string, unknown>;
@@ -38,7 +31,7 @@ async function POST(req: Request) {
   }
 }
 
-async function GET(req: Request) {
+export async function GET(req: Request) {
   const url = new URL(req.url);
   const sku = url.searchParams.get("sku") || "";
   const quantity = Number(url.searchParams.get("quantity") || 1);

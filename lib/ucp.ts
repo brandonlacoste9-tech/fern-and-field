@@ -1,5 +1,7 @@
+import { CATALOG, PRODUCTS, formatMoney } from "./catalog";
+import { UCP_VERSION } from "./commerce-types";
 
-function buildUcpProfile(origin: string) {
+export function buildUcpProfile(origin: string) {
   const base = origin.replace(/\/$/, "");
   return {
     ucp: {
@@ -83,11 +85,9 @@ function buildUcpProfile(origin: string) {
   };
 }
 
-const CORS = {
+export const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, UCP-Agent, Authorization",
   "Cache-Control": "public, max-age=60",
 };
-
-export default CORS;

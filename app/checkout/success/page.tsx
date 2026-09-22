@@ -2,7 +2,7 @@ export default function CheckoutSuccessPage() {
   return (
     <main className="mx-auto flex min-h-screen max-w-lg flex-col justify-center px-4 py-16 text-center">
       <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-zinc-500">
-        Replace the product catalog with the correct Fern and Field products: Monstera Deliciosa $38, Stoneware Planter $26, Fern Trio Set $54. Remove the incorrect field-goods products (field notebook, camp blanket, brass desk lamp, canvas tote). Update lib/catalog.ts and all product references.
+        Fern and Field
       </p>
       <h1 className="mt-3 text-3xl font-semibold tracking-tight">Order received</h1>
       <p className="mt-3 text-sm text-zinc-600">

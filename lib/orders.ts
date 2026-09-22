@@ -1,3 +1,5 @@
+import { randomUUID } from "node:crypto";
+import type { OrderChannel, StoreOrder } from "./commerce-types";
 
 const DDL = "create table if not exists store_orders (\n  id text primary key,\n  created_at timestamptz not null default now(),\n  channel text not null,\n  sku text not null,\n  title text not null,\n  quantity integer not null,\n  amount integer not null,\n  currency text not null,\n  status text not null,\n  agent text,\n  spt text\n);\ncreate index if not exists store_orders_created_at_idx on store_orders (created_at desc);";
 
@@ -68,7 +70,7 @@ function toOrder(row: {
   };
 }
 
-async function listOrders(limit = 20): Promise<StoreOrder[]> {
+export async function listOrders(limit = 20): Promise<StoreOrder[]> {
   const cap = Math.max(1, Math.min(100, Number(limit) || 20));
   const pool = await ensureTable();
   if (!pool) return (g.__storeOrders || []).slice(0, cap);
@@ -79,7 +81,7 @@ async function listOrders(limit = 20): Promise<StoreOrder[]> {
   return res.rows.map(toOrder);
 }
 
-async function getOrder(id: string): Promise<StoreOrder | null> {
+export async function getOrder(id: string): Promise<StoreOrder | null> {
   const pool = await ensureTable();
   if (!pool) {
     return (g.__storeOrders || []).find((o) => o.id === id) || null;
@@ -91,7 +93,7 @@ async function getOrder(id: string): Promise<StoreOrder | null> {
   return res.rows[0] ? toOrder(res.rows[0]) : null;
 }
 
-async function createOrder(input: {
+export async function createOrder(input: {
   channel: OrderChannel;
   sku: string;
   title: string;
@@ -138,5 +140,3 @@ async function createOrder(input: {
   );
   return order;
 }
-
-export default DDL;

@@ -1,4 +1,5 @@
-
+"use client";
+import React, { useState } from "react";
 interface Product {
   id: string; sku: string; title: string; description: string; images: string[]; price: number; currency: string; inventory: number; gtin: string; brand: string;
 }
@@ -17,7 +18,7 @@ export default function ProductDetail({ product, onClose, formatMoney, ICONS, on
 
   return (
     <div className="fixed inset-0 z-[60] bg-black/70 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-[#F7F3EC] w-full max-w-5xl grid md:grid-cols-2 overflow-hidden" onClick={e => e.stopPropagation()}>
+      <div className="bg-[#F7F3EC] w-full max-w-5xl grid md:grid-cols-2 overflow-hidden" onClick={(e: any) => e.stopPropagation()}>
         <div className="aspect-[4/5] bg-[#1C1917] relative flex items-center justify-center text-stone-400">
           {ICONS[product.id]}
           <div className="absolute top-6 left-6 font-mono text-xs tracking-[0.2em] text-stone-500">01</div>

@@ -1,3 +1,4 @@
+import type { OrderChannel } from "./commerce-types";
 
 const CHANNELS: OrderChannel[] = ["chatgpt", "gemini", "copilot", "human"];
 
@@ -9,7 +10,7 @@ function asChannel(raw: string | null | undefined): OrderChannel | null {
   return (CHANNELS as string[]).includes(v) ? (v as OrderChannel) : null;
 }
 
-function detectChannel(req: Request, body?: Record<string, unknown> | null): OrderChannel {
+export function detectChannel(req: Request, body?: Record<string, unknown> | null): OrderChannel {
   const url = new URL(req.url);
   const q =
     asChannel(url.searchParams.get("channel")) ||
@@ -33,8 +34,4 @@ function detectChannel(req: Request, body?: Record<string, unknown> | null): Ord
   if (ref.includes("copilot.microsoft.com")) return "copilot";
 
   return "human";
-}
-
-export default function CHANNELS() {
-  return null;
 }

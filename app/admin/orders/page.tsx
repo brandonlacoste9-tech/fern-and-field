@@ -1,14 +1,9 @@
 import { listOrders } from "@/lib/orders";
 import { formatMoney } from "@/lib/catalog";
 
+export const dynamic = "force-dynamic";
 
-
-
-
-
-const dynamic = "force-dynamic";
-
-async export default function AdminOrdersPage() {
+export default async function AdminOrdersPage() {
   const orders = await listOrders(20);
   return (
     <main className="mx-auto min-h-screen max-w-3xl px-4 py-12">

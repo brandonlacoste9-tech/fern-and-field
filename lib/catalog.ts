@@ -1,7 +1,8 @@
+import type { StoreCatalog, StoreProduct } from "./commerce-types";
 
-const CATALOG: StoreCatalog = {
-  "merchant": "Replace the product catalog with the correct Fern and Field products: Monstera Deliciosa $38, Stoneware Planter $26, Fern Trio Set $54. Remove the incorrect field-goods products (field notebook, camp blanket, brass desk lamp, canvas tote). Update lib/catalog.ts and all product references.",
-  "brand": "Replace the product catalog with the correct Fern and Field products: Monstera Deliciosa $38, Stoneware Planter $26, Fern Trio Set $54. Remove the incorrect field-goods products (field notebook, camp blanket, brass desk lamp, canvas tote). Update lib/catalog.ts and all product references.",
+export const CATALOG: StoreCatalog = {
+  "merchant": "Fern and Field",
+  "brand": "Fern and Field",
   "description": "Field goods for people who still write things down. One catalog, human storefront and agent profile.",
   "policies": {
     "privacy": "/policies/privacy",
@@ -15,9 +16,9 @@ const CATALOG: StoreCatalog = {
 ]
 } as StoreCatalog;
 
-const PRODUCTS: StoreProduct[] = CATALOG.products;
+export const PRODUCTS: StoreProduct[] = CATALOG.products;
 
-function getProduct(id: string): StoreProduct | null {
+export function getProduct(id: string): StoreProduct | null {
   const key = String(id || "").toLowerCase();
   return (
     PRODUCTS.find(
@@ -29,7 +30,7 @@ function getProduct(id: string): StoreProduct | null {
   );
 }
 
-function searchProducts(query?: string): StoreProduct[] {
+export function searchProducts(query?: string): StoreProduct[] {
   const q = String(query || "")
     .trim()
     .toLowerCase();
@@ -39,13 +40,9 @@ function searchProducts(query?: string): StoreProduct[] {
   );
 }
 
-function formatMoney(cents: number, currency = "usd"): string {
+export function formatMoney(cents: number, currency = "usd"): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: currency.toUpperCase(),
   }).format(cents / 100);
-}
-
-export default function CATALOG() {
-  return null;
 }

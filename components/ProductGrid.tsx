@@ -1,4 +1,5 @@
-
+"use client";
+import React from "react";
 interface Product {
   id: string; sku: string; title: string; description: string; images: string[]; price: number; currency: string; inventory: number; gtin: string; brand: string;
 }
@@ -13,7 +14,7 @@ interface ProductGridProps {
 export default function ProductGrid({ products, onSelect, formatMoney, ICONS }: ProductGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {products.map((product, index) => (
+      {products.map((product: any, index: any) => (
         <div key={product.id} onClick={() => onSelect(product)} className="group cursor-pointer">
           <div className="relative aspect-[4/5] overflow-hidden bg-stone-900 mb-4">
             <div className="absolute inset-0 flex items-center justify-center text-stone-400">
@@ -23,7 +24,7 @@ export default function ProductGrid({ products, onSelect, formatMoney, ICONS }: 
               {(index + 1).toString().padStart(2, '0')}
             </div>
             <button 
-              onClick={(e) => { e.stopPropagation(); onSelect(product); }}
+              onClick={(e: any) => { e.stopPropagation(); onSelect(product); }}
               className="absolute bottom-4 right-4 px-6 py-2 text-[11px] tracking-[0.18em] uppercase border border-stone-100 hover:bg-stone-100 hover:text-[#1C1917] transition-colors"
             >
               Quick add

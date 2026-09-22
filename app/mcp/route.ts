@@ -5,17 +5,6 @@ import { getOrder } from "@/lib/orders";
 import { detectChannel } from "@/lib/channel";
 import { CORS } from "@/lib/ucp";
 
-
-
-
-
-
-
-
-
-
-
-
 const TOOLS = [
   {
     name: "search_products",
@@ -59,11 +48,11 @@ const TOOLS = [
   },
 ];
 
-async function OPTIONS() {
+export async function OPTIONS(req: Request) {
   return new NextResponse(null, { status: 204, headers: CORS });
 }
 
-async function GET() {
+export async function GET() {
   return NextResponse.json(
     { protocol: "mcp", tools: TOOLS.map((t) => t.name) },
     { headers: CORS }
@@ -108,7 +97,7 @@ async function callTool(
   throw new Error("Unknown tool: " + name);
 }
 
-async function POST(req: Request) {
+export async function POST(req: Request) {
   let body: Record<string, unknown> = {};
   try {
     body = (await req.json()) as Record<string, unknown>;
@@ -125,7 +114,7 @@ async function POST(req: Request) {
         id,
         result: {
           protocolVersion: "2025-03-26",
-          serverInfo: { name: "Replace the product catalog with the correct Fern and Field products: Monstera Deliciosa $38, Stoneware Planter $26, Fern Trio Set $54. Remove the incorrect field-goods products (field notebook, camp blanket, brass desk lamp, canvas tote). Update lib/catalog.ts and all product references.", version: "0.1.0" },
+          serverInfo: { name: "Fern and Field", version: "0.1.0" },
           capabilities: { tools: {} },
         },
       },
@@ -168,5 +157,3 @@ async function POST(req: Request) {
     { status: 400, headers: CORS }
   );
 }
-
-export default TOOLS;
